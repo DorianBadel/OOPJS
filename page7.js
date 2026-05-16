@@ -3,6 +3,10 @@ function Minion(name, hp) {
   this.hp = hp;
 }
 
+Minion.prototype.toString = function () {
+  return this.name;
+};
+
 function Wizard(name, element, hp, mana) {
   Minion.call(this, name, hp);
   this.element = element;
@@ -11,14 +15,35 @@ function Wizard(name, element, hp, mana) {
 
 Wizard.prototype = Object.create(Minion.prototype);
 Wizard.prototype.constructor = Wizard;
-Minion.prototype.toString = function () {
-  return this.name;
+
+Wizard.prototype.castSpell = function (spell, target) {
+  console.log(this + " cast " + spell + " on " + target);
+  this.mana -= spell.mana;
+  spell(target);
+};
+
+Wizard.prototype.toString = function () {
+  return (
+    Minion.prototype.toString.apply(this, arguments) +
+    ", the " +
+    this.element +
+    " Wizard"
+  );
+};
+
+const lightningSpell = (target) => {
+  console.log("A bolt of lightning electrifies " + target + "(-10hp)");
+  target.hp -= 10;
+};
+lightningSpell.mana = 5;
+lightningSpell.toString = function () {
+  return "lightging spell";
 };
 
 var orc = new Minion("orc", 100);
 
-var orcMage = new Wizard(orc.name, "Fire", orc.hp, 20);
+var gandalf = new Wizard("Gandalf", "Grey", 50, 50);
 
-console.log("orc is a Minion: " + (orc instanceof Minion));
-console.log(orc.toString());
-console.log(orcMage.element);
+console.log("Gandalf is a Wizard: " + (gandalf instanceof Wizard));
+console.log("Gandalf is a Minion: " + (gandalf instanceof Minion));
+gandalf.castSpell(lightningSpell, orc);
