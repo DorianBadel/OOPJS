@@ -1,6 +1,7 @@
 {
+  "type": "module",
   "scripts": {
-    "dev": "nodemon page11.js"
+    "dev": "nodemon execution.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"
