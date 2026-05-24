@@ -1,10 +1,11 @@
-import { Minion, Thief, Wizard, Bard } from "./classes.js";
+import { Minion, Thief, Wizard, Bard, ClassyBard } from "./classes.js";
 import { lightningSpell } from "./spellBook.js";
 
 const thief = Thief("Locke Lamora", 30);
 const orc = new Minion("classy orc", 50);
 const wizard = Wizard("Randalf, the Red", "fire", 10, 100);
 const bard = Bard("Kvothe", "lute", 30, 50);
+const anotherBard = new ClassyBard("guitar", 100, "Jimmy Hendrix", 100);
 
 console.log(orc);
 
@@ -15,3 +16,7 @@ bard.steals("orc", "sandwich");
 bard.playsMusic();
 
 console.log(orc);
+
+anotherBard.steals("orc", "silver coin");
+anotherBard.castSpell(lightningSpell, orc);
+anotherBard.playsMusic();

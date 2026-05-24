@@ -61,4 +61,15 @@ function Bard(name, instrument, hp, mana) {
   return bard;
 }
 
-export { Minion, Wizard, Thief, Bard };
+// Delegation-based prototypical inheritance
+class ClassyBard extends Minion {
+  constructor(instrument, mana, name, hp) {
+    super(name, hp);
+    this.instrument = instrument;
+    this.mana = mana;
+  }
+}
+
+Object.assign(ClassyBard.prototype, canSteal, canCastSpells, canPlayMusic);
+
+export { Minion, Wizard, Thief, Bard, ClassyBard };
